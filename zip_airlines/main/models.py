@@ -3,7 +3,6 @@ from rest_framework.exceptions import ValidationError
 from zip_airlines import settings
 from math import log
 
-# Create your models here.
 
 class Airplane(models.Model):
     airplane_id = models.PositiveIntegerField(unique=True)
@@ -13,10 +12,11 @@ class Airplane(models.Model):
     minutes_to_fly = models.PositiveIntegerField(help_text='minutes to fly')
 
     def save(self, *args, **kwargs):
-        if Airplane.objects.count() <= settings.MAX_AIRPLANE_COUNT:
+        if Airplane.objects.count() < settings.MAX_AIRPLANE_COUNT:
+            print('---', Airplane.objects.count(), settings.MAX_AIRPLANE_COUNT)
             self.fuel_tank = 200 * self.airplane_id
             self.consumption = log(self.airplane_id) * 0.8 + self.passengers * 0.002
             self.minutes_to_fly = self.fuel_tank / self.consumption
             super(Airplane, self).save(*args, **kwargs)
         else:
-            raise ValidationError('You cannot add more airplanes')
+            raise ValidationError('You cannot add more airplanes, MAX 10')

@@ -1,6 +1,6 @@
-from math import log
 from .models import Airplane
 from rest_framework import serializers
+
 
 class AirplaneSerializer(serializers.ModelSerializer):
     class Meta:

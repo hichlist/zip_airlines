@@ -16,7 +16,6 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.urls import path
-from django.views.generic.base import RedirectView
 from rest_framework import routers
 from zip_airlines.main import views
 
@@ -26,7 +25,6 @@ router.register(r'airplanes', views.AirplaneViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^api/v1/', include(router.urls)),
-    url(r'^api/v1/auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
 ]

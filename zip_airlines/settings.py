@@ -58,14 +58,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-# Use nose to run all tests
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package',
-]
-
 ROOT_URLCONF = 'zip_airlines.urls'
 
 TEMPLATES = [
